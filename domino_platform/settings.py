@@ -32,19 +32,26 @@ DJANGO_APPS = [
 
 LOCAL_APSS = [
     'category',
-    'ad'
+    'ad',
+    'users',
+    'favorite'
 ]
 
 OTHER_APSS = [
     'rest_framework',
     'environ',
     'drf_spectacular',
-    'django_filters'
+    'django_filters',
+    'corsheaders'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APSS + OTHER_APSS
 
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer' # Включает интерфейс в браузере
+    ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
@@ -53,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # add CORS Headers for Frontend
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -130,6 +138,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+AUTH_USER_MODEL = 'users.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

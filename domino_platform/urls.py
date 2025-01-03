@@ -13,5 +13,7 @@ urlpatterns = [
     path('api/', include([
         path('', include('category.urls')),
         path('', include('ad.urls')),
+        path('', include('users.urls')),
+        path('', include('favorite.urls'))
     ])),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
